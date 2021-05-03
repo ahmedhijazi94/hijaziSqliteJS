@@ -81,10 +81,10 @@ var user = {
 	email: "ahmedhijazi94@gmail.com"
 }
 
-insertDB("userTable", user, "getInsertedId");
+insertDB("userTable", user, callbackFunction);
 
-function getInsertedId(data){
-   var insertedId = data;
+function callbackFunction(data){
+   var insertedId = data.insertId;
    console.log(insertedId);
 }
 ```
@@ -123,7 +123,7 @@ createTable(tables);
 THEN YOU CALL
 
 ```js
-readDB("userTable", "id = 1", {include: ['role', 'token']}, "getUsers");
+readDB("userTable", "id = 1", {include: ['role', 'token']}, getResults);
 
 function getResults(data){
 	console.log(data);
@@ -155,7 +155,7 @@ deleteDB('tableName1', "id = 2");
 You can count the rows of a table by calling the function countDB. It has 3 params: tableName, condition and callbackFunction. Ex:
 
 ```js
-countDB("tableName1", "age=24", "countUsers");
+countDB("tableName1", "age=24", countUsers);
 
 function countUsers(data){
 	console.log(data);
