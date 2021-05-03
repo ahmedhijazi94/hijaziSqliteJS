@@ -74,7 +74,7 @@
     //-------------------------------------------------------------------------------//
     //										CREATE
     //-------------------------------------------------------------------------------//
-    function insertDB(table, entries, getInsertedID) {
+    function insertDB(table, entries, callbackFunction) {
       var now = new Date().toLocaleString();
       //---------------------------------------------------------------//
       var qtdFields = Object.keys(entries).length;
@@ -91,8 +91,8 @@
       db.transaction(function (tx) {
         tx.executeSql("" + sql + "", [], function (tx, results) {
           //callback
-          if (getInsertedID) {
-            window[getInsertedID](results.insertId);
+          if (callbackFunction) {
+            callbackFunction(results);
           } else {
             console.log(results);
           }
